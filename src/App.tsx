@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Provider} from "react-redux";
+// import {IntlProvider} from "react-intl";
+import {store} from "./store";
 import './App.css';
+import Boot from "./boot";
+import AppContent from "./AppContent";
 
-function App() {
+// const getLanguageFromUrlParamIfPresent = () => {
+//   let params = new URLSearchParams(window.location.search);
+//   let lang = params.get("lang") ?? navigator.language.split("-")[0];
+//   console.log("detected language is " + lang);
+//   return !!lang ? lang : "en";
+// };
+
+// const currentAppLocale = getLanguageFromUrlParamIfPresent();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// @ts-ignore
+//       <IntlProvider locale={currentAppLocale} messages={messages[currentAppLocale]}>
+         <Provider store={store}>
+          <AppContent />
+         </Provider>
+       // </IntlProvider>
+);
 }
+
+Boot()
+    .then(() => App())
+    .catch(error => console.error(error));
 
 export default App;
